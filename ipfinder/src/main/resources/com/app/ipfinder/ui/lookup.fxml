@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="com.app.ipfinder.ui.controller.LookupController"
+        spacing="24"
+        styleClass="page">
+
+        <VBox spacing="5">
+
+                <Label
+                        text="IP Lookup"
+                        styleClass="page-title" />
+
+                <Label
+                        text="Get detailed geographical and network information about an IP address."
+                        styleClass="page-subtitle" />
+
+        </VBox>
+
+        <VBox spacing="8">
+
+                <Label
+                        text="Enter IP Address"
+                        styleClass="field-label" />
+
+                <HBox spacing="10">
+
+                        <TextField fx:id="queryField"
+                                promptText="e.g. 8.8.8.8 or google.com"
+                                HBox.hgrow="ALWAYS"
+                                styleClass="ip-input" />
+
+                        <Button
+                                fx:id="lookupButton"
+                                text="Lookup"
+                                onAction="#lookup"
+                                styleClass="primary-button" />
+
+                </HBox>
+
+                <Label
+                        text="Supports both IPv4 and IPv6 addresses."
+                        styleClass="help-text" />
+
+        </VBox>
+
+        <VBox fx:id="resultContainer"
+                spacing="18"
+                visible="false"
+                managed="false"
+                styleClass="result-card">
+
+                <Label text="IP Information"
+                        styleClass="card-title" />
+
+                <GridPane hgap="35" vgap="14">
+
+                        <columnConstraints>
+                                <ColumnConstraints minWidth="120" />
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="180" />
+
+                                <ColumnConstraints minWidth="120" />
+                                <ColumnConstraints hgrow="ALWAYS" minWidth="180" />
+                        </columnConstraints>
+
+
+                        <!-- Query -->
+                        <Label text="Query"
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="queryLabel"
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- Country -->
+                        <Label text="Country"
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="countryLabel"
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- Country Code -->
+                        <Label text="Country Code"
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="countryCodeLabel"
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- Region -->
+                        <Label text="Region"
+                                GridPane.rowIndex="3"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="regionLabel"
+                                GridPane.rowIndex="3"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- City -->
+                        <Label text="City"
+                                GridPane.rowIndex="4"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="cityLabel"
+                                GridPane.rowIndex="4"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- ZIP -->
+                        <Label text="ZIP"
+                                GridPane.rowIndex="5"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="zipLabel"
+                                GridPane.rowIndex="5"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- Latitude -->
+                        <Label text="Latitude"
+                                GridPane.rowIndex="6"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="latLabel"
+                                GridPane.rowIndex="6"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- Longitude -->
+                        <Label text="Longitude"
+                                GridPane.rowIndex="7"
+                                GridPane.columnIndex="0"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="lonLabel"
+                                GridPane.rowIndex="7"
+                                GridPane.columnIndex="1"
+                                styleClass="detail-value" />
+
+
+                        <!-- Timezone -->
+                        <Label text="Timezone"
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="2"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="timezoneLabel"
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="3"
+                                styleClass="detail-value" />
+
+
+                        <!-- ISP -->
+                        <Label text="ISP"
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="2"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="ispLabel"
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="3"
+                                styleClass="detail-value" />
+
+
+                        <!-- Organization -->
+                        <Label text="Organization"
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="2"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="orgLabel"
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="3"
+                                styleClass="detail-value" />
+
+
+                        <!-- AS -->
+                        <Label text="AS"
+                                GridPane.rowIndex="3"
+                                GridPane.columnIndex="2"
+                                styleClass="detail-label" />
+
+                        <Label fx:id="asLabel"
+                                GridPane.rowIndex="3"
+                                GridPane.columnIndex="3"
+                                styleClass="detail-value" />
+
+                </GridPane>
+        </VBox>
+        
+        <Label
+                fx:id="statusLabel"
+                styleClass="status-message" />
+
+</VBox>

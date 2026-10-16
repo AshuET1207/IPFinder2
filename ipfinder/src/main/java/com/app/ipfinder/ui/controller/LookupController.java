@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 public class LookupController {
 
     @FXML
-    private TextField ipField;
+    private TextField queryField;
 
     @FXML
     private Button lookupButton;
@@ -30,24 +30,48 @@ public class LookupController {
     private VBox resultContainer;
 
     @FXML
-    private Label ipLabel;
+    private Label queryLabel;
 
     @FXML
     private Label countryLabel;
 
     @FXML
+    private Label countryCodeLabel;
+
+    @FXML
+    private Label regionLabel;
+
+    @FXML
     private Label cityLabel;
 
     @FXML
+    private Label zipLabel;
+
+    @FXML
+    private Label latLabel;
+
+    @FXML
+    private Label lonLabel;
+
+    @FXML
+    private Label timezoneLabel;
+
+    @FXML
     private Label ispLabel;
+
+    @FXML
+    private Label orgLabel;
+
+    @FXML
+    private Label asLabel;
 
     private final IpLookupService lookupService;
     private final ExecutorService backgroundExecutor;
 
     public LookupController(
             IpLookupService lookupService,
-            ExecutorService backgroundExecutor
-    ) {
+            ExecutorService backgroundExecutor) {
+
         this.lookupService = lookupService;
         this.backgroundExecutor = backgroundExecutor;
     }
@@ -57,12 +81,13 @@ public class LookupController {
         resultContainer.setVisible(false);
         resultContainer.setManaged(false);
 
-        ipField.setOnAction(event -> lookup());
+        queryField.setOnAction(event -> lookup());
     }
 
     @FXML
     private void lookup() {
-        String ip = ipField.getText();
+
+        String query = queryField.getText();
 
         setLoading(true);
         hideResult();
@@ -72,28 +97,38 @@ public class LookupController {
 
             @Override
             protected LookupEntry call() {
-                return lookupService.lookup(ip);
+                return lookupService.lookup(query);
             }
         };
 
         task.setOnSucceeded(event -> {
+
             LookupEntry entry = task.getValue();
 
             showResult(entry);
+
             setStatus("Lookup completed.");
+            statusLabel.getStyleClass().add("success");
+
             setLoading(false);
         });
 
         task.setOnFailed(event -> {
+
             Throwable exception = task.getException();
 
             if (exception instanceof InvalidIpException
                     || exception instanceof LookupFailedException) {
 
                 setStatus(exception.getMessage());
+                statusLabel.getStyleClass().add("error");
 
             } else {
+
+                exception.printStackTrace();
+
                 setStatus("An unexpected error occurred.");
+                statusLabel.getStyleClass().add("error");
             }
 
             setLoading(false);
@@ -103,10 +138,54 @@ public class LookupController {
     }
 
     private void showResult(LookupEntry entry) {
-        ipLabel.setText(valueOrDash(entry.ip()));
-        countryLabel.setText(valueOrDash(entry.country()));
-        cityLabel.setText(valueOrDash(entry.city()));
-        ispLabel.setText(valueOrDash(entry.isp()));
+
+        queryLabel.setText(
+                valueOrDash(entry.query())
+        );
+
+        countryLabel.setText(
+                valueOrDash(entry.country())
+        );
+
+        countryCodeLabel.setText(
+                valueOrDash(entry.countryCode())
+        );
+
+        regionLabel.setText(
+                valueOrDash(entry.regionName())
+        );
+
+        cityLabel.setText(
+                valueOrDash(entry.city())
+        );
+
+        zipLabel.setText(
+                valueOrDash(entry.zip())
+        );
+
+        latLabel.setText(
+                valueOrDash(entry.lat())
+        );
+
+        lonLabel.setText(
+                valueOrDash(entry.lon())
+        );
+
+        timezoneLabel.setText(
+                valueOrDash(entry.timezone())
+        );
+
+        ispLabel.setText(
+                valueOrDash(entry.isp())
+        );
+
+        orgLabel.setText(
+                valueOrDash(entry.org())
+        );
+
+        asLabel.setText(
+                valueOrDash(entry.asInfo())
+        );
 
         resultContainer.setManaged(true);
         resultContainer.setVisible(true);
@@ -118,8 +197,9 @@ public class LookupController {
     }
 
     private void setLoading(boolean loading) {
+
         lookupButton.setDisable(loading);
-        ipField.setDisable(loading);
+        queryField.setDisable(loading);
 
         lookupButton.setText(
                 loading ? "Looking up..." : "Lookup"
@@ -127,12 +207,24 @@ public class LookupController {
     }
 
     private void setStatus(String message) {
+
+        statusLabel.getStyleClass()
+                .removeAll("success", "error");
+
         statusLabel.setText(message);
     }
 
     private String valueOrDash(String value) {
+
         return value == null || value.isBlank()
                 ? "—"
                 : value;
+    }
+
+    private String valueOrDash(Double value) {
+
+        return value == null
+                ? "—"
+                : String.valueOf(value);
     }
 }

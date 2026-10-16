@@ -11,35 +11,39 @@ import java.time.Instant;
 public class IpLookupService {
 
     private final GeoIpClient geoIpClient;
-    private final IpValidator ipValidator;
+    private final LookupQueryValidator ipValidator;
     private final HistoryService historyService;
 
     public IpLookupService(
             GeoIpClient geoIpClient,
-            IpValidator ipValidator,
-            HistoryService historyService
-    ) {
+            LookupQueryValidator ipValidator,
+            HistoryService historyService) {
         this.geoIpClient = geoIpClient;
         this.ipValidator = ipValidator;
         this.historyService = historyService;
     }
 
-    public LookupEntry lookup(String ip) {
-        ipValidator.validate(ip);
+    public LookupEntry lookup(String query) {
+        ipValidator.validate(query);
 
-        String normalizedIp = ip.trim();
+        String normalizedQuery = query.trim();
 
-        IpInfo info = geoIpClient.lookup(normalizedIp);
+        IpInfo info = geoIpClient.lookup(normalizedQuery);
 
         LookupEntry entry = new LookupEntry(
-                info.query() != null
-                        ? info.query()
-                        : normalizedIp,
+                info.query() != null ? info.query() : normalizedQuery,
                 info.country(),
+                info.countryCode(),
+                info.regionName(),
                 info.city(),
+                info.zip(),
+                info.lat(),
+                info.lon(),
+                info.timezone(),
                 info.isp(),
-                Instant.now()
-        );
+                info.org(),
+                info.as(),
+                Instant.now());
 
         historyService.add(entry);
 

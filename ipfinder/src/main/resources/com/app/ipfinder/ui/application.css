@@ -1,0 +1,210 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f7f9fc;
+}
+
+/* ---------- Layout ---------- */
+
+.sidebar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e1e7ef;
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 24;
+    -fx-spacing: 24;
+}
+
+.content-area {
+    -fx-background-color: #f7f9fc;
+}
+
+.page {
+    -fx-padding: 32;
+    -fx-spacing: 24;
+}
+
+/* ---------- Typography ---------- */
+
+.app-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #172033;
+}
+
+.page-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #172033;
+}
+
+.page-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #697586;
+}
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #273449;
+}
+
+.help-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7a8798;
+}
+
+/* ---------- Navigation ---------- */
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-width: 0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 11 14;
+    -fx-font-size: 14px;
+    -fx-text-fill: #425066;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: #edf4fc;
+}
+
+.nav-button.active {
+    -fx-background-color: #dcecff;
+    -fx-text-fill: #1672ce;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Inputs ---------- */
+
+.ip-input {
+    -fx-background-color: white;
+    -fx-border-color: #cfd8e3;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 11 14;
+    -fx-font-size: 13px;
+}
+
+.ip-input:focused {
+    -fx-border-color: #3184d8;
+}
+
+/* ---------- Buttons ---------- */
+
+.primary-button {
+    -fx-background-color: #3184d8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 11 22;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #2674c2;
+}
+
+.secondary-button {
+    -fx-background-color: white;
+    -fx-border-color: #cfd8e3;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 9 16;
+    -fx-text-fill: #334155;
+    -fx-cursor: hand;
+}
+
+.danger-button {
+    -fx-background-color: white;
+    -fx-border-color: #e5b5b5;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 9 16;
+    -fx-text-fill: #c03939;
+    -fx-cursor: hand;
+}
+
+/* ---------- Cards ---------- */
+
+.result-card {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #dce3eb;
+    -fx-padding: 22;
+    -fx-max-width: 1000;
+}
+
+.card-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #263449;
+}
+
+.detail-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #718096;
+}
+
+.detail-value {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #263449;
+}
+
+/* ---------- Status ---------- */
+
+.status-message {
+    -fx-font-size: 13px;
+    -fx-text-fill: #c03939;
+}
+
+/* ---------- Table ---------- */
+
+.history-table {
+    -fx-background-color: white;
+    -fx-border-color: #dce3eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.history-table .column-header-background {
+    -fx-background-color: #f4f7fa;
+}
+
+.history-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #dce3eb transparent;
+}
+
+.history-table .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #425066;
+}
+
+.history-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #edf0f4 transparent;
+}
+
+.history-table .table-row-cell:hover {
+    -fx-background-color: #f7faff;
+}
+
+.history-table .table-row-cell:selected {
+    -fx-background-color: #e7f1fc;
+}
+
+.status-message {
+    -fx-font-size: 13px;
+    -fx-text-fill: #4b5563;
+}
+
+.status-message.success {
+    -fx-text-fill: #16803c;
+}
+
+.status-message.error {
+    -fx-text-fill: #c03939;
+}

@@ -2,14 +2,16 @@ package com.app.ipfinder.ui.controller;
 
 import com.app.ipfinder.model.LookupEntry;
 import com.app.ipfinder.service.HistoryService;
+
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
@@ -18,98 +20,95 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class HistoryController {
 
-    @FXML
-    private TableView<LookupEntry> historyTable;
+        @FXML
+        private TableView<LookupEntry> historyTable;
 
-    @FXML
-    private TableColumn<LookupEntry, String> ipColumn;
+        @FXML
+        private TableColumn<LookupEntry, String> ipColumn;
 
-    @FXML
-    private TableColumn<LookupEntry, String> countryColumn;
+        @FXML
+        private TableColumn<LookupEntry, String> countryColumn;
 
-    @FXML
-    private TableColumn<LookupEntry, String> cityColumn;
+        @FXML
+        private TableColumn<LookupEntry, String> cityColumn;
 
-    @FXML
-    private TableColumn<LookupEntry, String> ispColumn;
+        @FXML
+        private TableColumn<LookupEntry, String> ispColumn;
 
-    @FXML
-    private TableColumn<LookupEntry, String> timestampColumn;
+        @FXML
+        private TableColumn<LookupEntry, String> timestampColumn;
 
-    @FXML
-    private Button clearButton;
+        @FXML
+        private Button clearButton;
 
-    private final HistoryService historyService;
+        private final HistoryService historyService;
 
-    private final ObservableList<LookupEntry> history =
-            FXCollections.observableArrayList();
+        private final ObservableList<LookupEntry> history = FXCollections.observableArrayList();
 
-    private static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm")
-                    .withZone(ZoneId.systemDefault());
+        private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm")
+                        .withZone(ZoneId.systemDefault());
 
-    public HistoryController(HistoryService historyService) {
-        this.historyService = historyService;
-    }
+        public HistoryController(HistoryService historyService) {
+                this.historyService = historyService;
+        }
 
-    @FXML
-    private void initialize() {
-        configureColumns();
-        historyTable.setItems(history);
+        private String valueOrDash(String value) {
+                return (value == null || value.isEmpty()) ? "—" : value;
+        }
 
-        refresh();
-    }
+        @FXML
+        private void initialize() {
+                configureColumns();
+                historyTable.setItems(history);
 
-    private void configureColumns() {
-        ipColumn.setCellValueFactory(
-                new PropertyValueFactory<>("ip")
-        );
+                refresh();
+        }
 
-        countryColumn.setCellValueFactory(
-                new PropertyValueFactory<>("country")
-        );
+        private void configureColumns() {
 
-        cityColumn.setCellValueFactory(
-                new PropertyValueFactory<>("city")
-        );
+                ipColumn.setCellValueFactory(
+                                cell -> new SimpleStringProperty(
+                                                valueOrDash(cell.getValue().query())));
 
-        ispColumn.setCellValueFactory(
-                new PropertyValueFactory<>("isp")
-        );
+                countryColumn.setCellValueFactory(
+                                cell -> new SimpleStringProperty(
+                                                valueOrDash(cell.getValue().country())));
 
-        timestampColumn.setCellValueFactory(
-                cell -> new javafx.beans.property.SimpleStringProperty(
-                        cell.getValue().timestamp() == null
-                                ? "—"
-                                : DATE_FORMATTER.format(
-                                        cell.getValue().timestamp()
-                                )
-                        ));
-    }
+                cityColumn.setCellValueFactory(
+                                cell -> new SimpleStringProperty(
+                                                valueOrDash(cell.getValue().city())));
 
-    public void refresh() {
-        history.setAll(historyService.getAll());
-    }
+                ispColumn.setCellValueFactory(
+                                cell -> new SimpleStringProperty(
+                                                valueOrDash(cell.getValue().isp())));
 
-    @FXML
-    private void clearHistory() {
-        Alert confirmation = new Alert(
-                Alert.AlertType.CONFIRMATION
-        );
+                timestampColumn.setCellValueFactory(
+                                cell -> new SimpleStringProperty(
+                                                cell.getValue().timestamp() == null
+                                                                ? "—"
+                                                                : DATE_FORMATTER.format(
+                                                                                cell.getValue().timestamp())));
+        }
 
-        confirmation.setTitle("Clear History");
-        confirmation.setHeaderText("Clear lookup history?");
-        confirmation.setContentText(
-                "All saved lookup entries will be removed."
-        );
+        public void refresh() {
+                history.setAll(historyService.getAll());
+        }
 
-        confirmation.showAndWait()
-                .filter(response ->
-                        response == javafx.scene.control.ButtonType.OK
-                )
-                .ifPresent(response -> {
-                    historyService.clear();
-                    refresh();
-                });
-    }
+        @FXML
+        private void clearHistory() {
+                Alert confirmation = new Alert(
+                                Alert.AlertType.CONFIRMATION);
+
+                confirmation.setTitle("Clear History");
+                confirmation.setHeaderText("Clear lookup history?");
+                confirmation.setContentText(
+                                "All saved lookup entries will be removed.");
+
+                confirmation.showAndWait()
+                                .filter(response -> response == ButtonType.OK)
+                                .ifPresent(response -> {
+                                        historyService.clear();
+                                        refresh();
+                                });
+        }
 }

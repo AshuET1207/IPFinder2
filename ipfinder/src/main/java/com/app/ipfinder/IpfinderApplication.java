@@ -16,6 +16,7 @@ import java.net.URL;
 public class IpfinderApplication extends Application {
 
     private ConfigurableApplicationContext springContext;
+    private final String UIPATH = "/com/app/ipfinder/ui/";
 
     /** Runs on the JavaFX launcher thread, before start(). Boot Spring here. */
     @Override
@@ -29,22 +30,29 @@ public class IpfinderApplication extends Application {
     /** Runs on the JavaFX Application Thread. Build the window here. */
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/fxml/main-view.fxml"));
+        URL fxml = getClass().getResource(UIPATH + "main.fxml");
+
+        if (fxml == null) {
+            throw new IllegalStateException(
+                    "FXML not found: " + UIPATH + "main.fxml");
+        }
+
+        FXMLLoader loader = new FXMLLoader(fxml);
         loader.setControllerFactory(springContext::getBean);
 
         Parent root = loader.load();
-        Scene scene = new Scene(root, 900, 600);
 
-        URL css = getClass().getResource("/css/styles.css");
+        Scene scene = new Scene(root, 1150, 750);
+
+        URL css = getClass().getResource(UIPATH + "application.css");
         if (css != null) {
             scene.getStylesheets().add(css.toExternalForm());
         }
 
         stage.setTitle("IPFinder");
         stage.setScene(scene);
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
+        stage.setMinWidth(900);
+        stage.setMinHeight(650);
         stage.show();
     }
 
