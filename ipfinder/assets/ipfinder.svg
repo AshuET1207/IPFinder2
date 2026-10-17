@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 512 512"
+     width="512"
+     height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29477b"/>
+      <stop offset="48%" stop-color="#182f5d"/>
+      <stop offset="100%" stop-color="#071a3d"/>
+    </linearGradient>
+
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ecffff"/>
+      <stop offset="38%" stop-color="#a7f4ff"/>
+      <stop offset="100%" stop-color="#00bff0"/>
+    </linearGradient>
+
+    <linearGradient id="pin" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#dfffff"/>
+      <stop offset="45%" stop-color="#51e7f7"/>
+      <stop offset="100%" stop-color="#00aeea"/>
+    </linearGradient>
+
+    <linearGradient id="edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8da5ca"/>
+      <stop offset="35%" stop-color="#526f9e"/>
+      <stop offset="100%" stop-color="#203e70"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="13"
+                    flood-color="#0b1c3c" flood-opacity="0.34"/>
+    </filter>
+
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Transparent canvas: no background rectangle -->
+
+  <!-- Main icon -->
+  <rect x="42" y="42" width="428" height="428" rx="92"
+        fill="url(#bg)"
+        stroke="url(#edge)"
+        stroke-width="7"
+        filter="url(#shadow)"/>
+
+  <!-- Subtle inner highlight -->
+  <rect x="50" y="50" width="412" height="412" rx="84"
+        fill="none"
+        stroke="#7892bb"
+        stroke-opacity="0.16"
+        stroke-width="2"/>
+
+  <!-- Terminal prompt -->
+  <path d="M143 166 L235 238
+           C242 243 242 253 235 258
+           L143 330"
+        fill="none"
+        stroke="url(#cyan)"
+        stroke-width="30"
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+        filter="url(#glow)"/>
+
+  <!-- Cursor -->
+  <rect x="246" y="326" width="102" height="30" rx="1"
+        fill="url(#cyan)"
+        filter="url(#glow)"/>
+
+  <!-- Location pin -->
+  <path d="M318 140
+           C285 140 258 167 258 200
+           C258 247 318 302 318 302
+           C318 302 378 247 378 200
+           C378 167 351 140 318 140 Z"
+        fill="url(#pin)"
+        filter="url(#glow)"/>
+
+  <!-- Pin center -->
+  <circle cx="318" cy="199" r="18" fill="#1b3b6d"/>
+  <circle cx="318" cy="199" r="9" fill="#d9fbff" opacity="0.95"/>
+</svg>
