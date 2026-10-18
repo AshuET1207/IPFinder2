@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import org.springframework.stereotype.Component;
 
@@ -60,6 +61,31 @@ public class HistoryController {
         private void initialize() {
                 configureColumns();
                 historyTable.setItems(history);
+                historyTable.setRowFactory(tableView -> new TableRow<>() {
+                        @Override
+                        protected void updateItem(LookupEntry item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (empty || item == null) {
+                                        setStyle("-fx-background-color: transparent;");
+                                } else {
+                                        setStyle("");
+                                }
+                        }
+
+                });
+                historyTable.setRowFactory(tableView -> new TableRow<>() {
+                        @Override
+                        protected void updateItem(LookupEntry item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (empty || item == null) {
+                                        setStyle("-fx-background-color: transparent;");
+                                } else {
+                                        setStyle("");
+                                }
+                        }
+                });
 
                 refresh();
         }

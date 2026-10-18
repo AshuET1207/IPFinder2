@@ -11,49 +11,54 @@
         xmlns:fx="http://javafx.com/fxml"
         fx:controller="com.app.ipfinder.ui.controller.MainController">
 
-    <left>
+        <left>
 
-        <VBox
-                prefWidth="220"
-                spacing="10"
-                styleClass="sidebar">
+                <VBox
+                        prefWidth="220"
+                        spacing="10"
+                        styleClass="sidebar">
 
-            <Label
-                    text="IP Finder"
-                    styleClass="app-title"/>
+                        <Label
+                                text="IP Finder"
+                                styleClass="app-title" />
 
-            <VBox
-                    spacing="6"
-                    VBox.vgrow="ALWAYS">
+                        <VBox
+                                spacing="6"
+                                VBox.vgrow="ALWAYS">
 
-                <Button
-                        fx:id="lookupButton"
-                        text="⌕  Lookup"
-                        onAction="#showLookup"
-                        styleClass="nav-button"/>
+                                <Button
+                                        fx:id="lookupButton"
+                                        text="⌕  Lookup"
+                                        onAction="#showLookup"
+                                        styleClass="nav-button" />
 
-                <Button
-                        fx:id="historyButton"
-                        text="◷  History"
-                        onAction="#showHistory"
-                        styleClass="nav-button"/>
+                                <Button
+                                        fx:id="historyButton"
+                                        text="◷  History"
+                                        onAction="#showHistory"
+                                        styleClass="nav-button" />
 
-            </VBox>
 
-            <Label
-                    fx:id="statusLabel"
-                    styleClass="sidebar-status"/>
+                        </VBox>
+                        <Button fx:id="themeButton"
+                                text="☾  Dark Mode"
+                                onAction="#toggleTheme"
+                                styleClass="nav-button" />
 
-        </VBox>
+                        <Label
+                                fx:id="statusLabel"
+                                styleClass="sidebar-status" />
 
-    </left>
+                </VBox>
 
-    <center>
+        </left>
 
-        <StackPane
-                fx:id="contentPane"
-                styleClass="content-area"/>
+        <center>
 
-    </center>
+                <StackPane
+                        fx:id="contentPane"
+                        styleClass="content-area" />
+
+        </center>
 
 </BorderPane>

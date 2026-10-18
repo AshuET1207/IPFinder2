@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -42,17 +45,20 @@ public class IpfinderApplication extends Application {
 
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 1150, 750);
+        Scene scene = new Scene(root, 1000, 650);
 
         URL css = getClass().getResource(UIPATH + "application.css");
         if (css != null) {
             scene.getStylesheets().add(css.toExternalForm());
         }
 
+        Image icon = new Image(getClass().getResourceAsStream("/assets/ipfinder.png"));
+
         stage.setTitle("IPFinder");
         stage.setScene(scene);
+        stage.getIcons().add(icon);
         stage.setMinWidth(900);
-        stage.setMinHeight(650);
+        stage.setMinHeight(550);
         stage.show();
     }
 

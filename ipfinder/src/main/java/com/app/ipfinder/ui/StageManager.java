@@ -26,7 +26,7 @@ public class StageManager {
         this.primaryStage = primaryStage;
 
         primaryStage.setMinWidth(900);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinHeight(500);
     }
 
     public void showMainWindow() {
@@ -37,8 +37,8 @@ public class StageManager {
 
         Scene scene = new Scene(
                 root,
-                1100,
-                700
+                1000,
+                600
         );
 
         primaryStage.setTitle("IP Finder");

@@ -78,12 +78,14 @@
 /* ---------- Inputs ---------- */
 
 .ip-input {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-border-color: #cfd8e3;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
     -fx-padding: 11 14;
     -fx-font-size: 13px;
+    -fx-text-fill: #273449;
+    -fx-prompt-text-fill: #8a96a6;
 }
 
 .ip-input:focused {
@@ -106,7 +108,7 @@
 }
 
 .secondary-button {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-border-color: #cfd8e3;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
@@ -115,8 +117,12 @@
     -fx-cursor: hand;
 }
 
+.secondary-button:hover {
+    -fx-background-color: #f4f7fa;
+}
+
 .danger-button {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-border-color: #e5b5b5;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
@@ -125,10 +131,14 @@
     -fx-cursor: hand;
 }
 
+.danger-button:hover {
+    -fx-background-color: #fff5f5;
+}
+
 /* ---------- Cards ---------- */
 
 .result-card {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-border-color: #dce3eb;
@@ -157,16 +167,25 @@
 
 .status-message {
     -fx-font-size: 13px;
+    -fx-text-fill: #4b5563;
+}
+
+.status-message.success {
+    -fx-text-fill: #16803c;
+}
+
+.status-message.error {
     -fx-text-fill: #c03939;
 }
 
 /* ---------- Table ---------- */
 
 .history-table {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-border-color: #dce3eb;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
+    -fx-padding: 0;
 }
 
 .history-table .column-header-background {
@@ -174,18 +193,25 @@
 }
 
 .history-table .column-header {
-    -fx-background-color: transparent;
+    -fx-background-color: #f4f7fa;
     -fx-border-color: transparent transparent #dce3eb transparent;
+    -fx-size: 42px;
 }
 
 .history-table .column-header .label {
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-text-fill: #425066;
 }
 
 .history-table .table-row-cell {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-border-color: transparent transparent #edf0f4 transparent;
+    -fx-cell-size: 40px;
+}
+
+.history-table .table-row-cell:odd {
+    -fx-background-color: #fafbfd;
 }
 
 .history-table .table-row-cell:hover {
@@ -196,15 +222,55 @@
     -fx-background-color: #e7f1fc;
 }
 
-.status-message {
+.history-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #263449;
+}
+
+.history-table .table-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #334155;
     -fx-font-size: 13px;
-    -fx-text-fill: #4b5563;
+    -fx-border-color: transparent;
+    -fx-padding: 0 10px;
 }
 
-.status-message.success {
-    -fx-text-fill: #16803c;
+/* Empty rows should not appear as striped rows */
+.history-table .table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
-.status-message.error {
-    -fx-text-fill: #c03939;
+.history-table .table-row-cell:empty .table-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Table filler area */
+.history-table .filler {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+}
+
+/* Remove default focus highlight */
+.history-table:focused {
+    -fx-background-insets: 0;
+}
+
+/* ---------- Scrollbar ---------- */
+
+.history-table .scroll-bar {
+    -fx-background-color: #ffffff;
+}
+
+.history-table .scroll-bar .track {
+    -fx-background-color: #f4f7fa;
+}
+
+.history-table .scroll-bar .thumb {
+    -fx-background-color: #cbd5e1;
+    -fx-background-radius: 5;
+}
+
+.history-table .scroll-bar .thumb:hover {
+    -fx-background-color: #94a3b8;
 }
